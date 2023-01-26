@@ -17,10 +17,13 @@ class PostSeeder extends Seeder
      */
     public function run(Faker $faker)
     {
+        // cancello tutti i dati della tabella Posts
+        Post::truncate();
+
         for( $i = 0; $i < 10; $i++ ) {
             $new_post = new Post();
             $new_post->title = $faker->sentence();
-            $new_post->content = $faker->text();
+            $new_post->content = $faker->text(1000);
             $new_post->slug = Str::slug($new_post->title, '-');
             $new_post->save();
         }
