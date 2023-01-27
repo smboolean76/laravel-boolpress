@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\StorePostRequest;
 use App\Http\Requests\UpdatePostRequest;
 use App\Models\Post;
+use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Str;
 
 class PostController extends Controller
@@ -41,6 +42,10 @@ class PostController extends Controller
     public function store(StorePostRequest $request)
     {
         $data = $request->validated();
+
+        if ( isset($data['cover_image']) ) {
+            $data['cover_image'] = Storage::disk('public')->put('uploads', $data['cover_image']);
+        }
 
         $new_post = new Post();
         $new_post->fill($data);
@@ -86,6 +91,19 @@ class PostController extends Controller
         $old_title = $post->title;
 
         $post->slug = Str::slug($data['title']);
+
+        if ( isset($data['cover_image']) ) {
+            if( $post->cover_image ) {
+                Storage::disk('public')->delete($post->cover_image);
+            }
+            $data['cover_image'] = Storage::disk('public')->put('uploads', $data['cover_image']);
+        }
+
+        if( isset($data['no_image']) && $post->cover_image  ) {
+            Storage::disk('public')->delete($post->cover_image);
+            $post->cover_image = null;
+        }
+
         $post->update($data);
 
         return redirect()->route('admin.posts.index')->with('message', "Il post $old_title è stato aggiornato!");
@@ -100,6 +118,10 @@ class PostController extends Controller
     public function destroy(Post $post)
     {
         $old_title = $post->title;
+
+        if( $post->cover_image ) {
+            Storage::disk('public')->delete($post->cover_image);
+        }
         
         $post->delete();
 
