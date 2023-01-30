@@ -53,6 +53,15 @@
                 });
               </script>
           </div>
+          <div class="mb-3">
+              <label for="category_id" class="form-label">Categoria</label>
+              <select class="form-select" name="category_id" id="category_id">
+                  <option value="">Senza Categoria</option>
+                  @foreach ($categories as $category)
+                      <option value="{{$category->id}}" {{ old('category_id', $post->category_id) == $category->id ? 'selected' : '' }}>{{$category->name}}</option>
+                  @endforeach
+              </select>
+          </div>
             <button type="submit" class="btn btn-primary">Modifica</button>
         </form>
     </div>

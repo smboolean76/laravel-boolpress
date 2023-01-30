@@ -4,6 +4,13 @@
 <div class="container">
   <div class="py-4">
     <h1>{{$post->title}}</h1>
+    <h3>
+      @if($post->category)
+        Categoria: <a href="{{route('admin.categories.show', $post->category)}}">{{$post->category->name}}</a>
+      @else 
+        Nessuna Categoria
+      @endif
+    </h3>
     <div class="mt-4">
         <div class="text-center">
           @if ($post->cover_image)

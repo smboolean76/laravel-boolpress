@@ -33,6 +33,15 @@
                 </div>
                 <input type="file" class="form-control" id="cover_image" name="cover_image" value="{{ old('cover_image') }}" onchange="loadFile(event)">
             </div>
+            <div class="mb-3">
+                <label for="category_id" class="form-label">Categoria</label>
+                <select class="form-select" name="category_id" id="category_id">
+                    <option value="">Senza Categoria</option>
+                    @foreach ($categories as $category)
+                        <option value="{{$category->id}}" {{ old('category_id') == $category->id ? 'selected' : '' }}>{{$category->name}}</option>
+                    @endforeach
+                </select>
+            </div>
             <button type="submit" class="btn btn-primary">Crea</button>
         </form>
     </div>
