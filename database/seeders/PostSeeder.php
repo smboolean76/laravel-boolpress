@@ -8,6 +8,7 @@ use Illuminate\Database\Seeder;
 use App\Models\Post;
 use Faker\Generator as Faker;
 use Illuminate\Support\Str;
+use Illuminate\Support\Facades\Schema;
 
 class PostSeeder extends Seeder
 {
@@ -19,7 +20,9 @@ class PostSeeder extends Seeder
     public function run(Faker $faker)
     {
         // cancello tutti i dati della tabella Posts
+        Schema::disableForeignKeyConstraints();
         Post::truncate();
+        Schema::enableForeignKeyConstraints();
 
         for( $i = 0; $i < 10; $i++ ) {
             $category = Category::inRandomOrder()->first();

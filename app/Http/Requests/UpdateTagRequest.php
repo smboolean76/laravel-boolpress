@@ -3,8 +3,9 @@
 namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Validation\Rule;
 
-class StorePostRequest extends FormRequest
+class UpdateTagRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -24,11 +25,7 @@ class StorePostRequest extends FormRequest
     public function rules()
     {
         return [
-            'title' => 'required|unique:posts|string|max:150',
-            'content' => 'required|string',
-            'cover_image' => 'nullable|image|max:2048',
-            'category_id' => 'nullable|exists:categories,id',
-            'tags' => 'nullable|exists:tags,id'
+            'name' => ['required','string',Rule::unique('tags')->ignore($this->tag), 'max:100']
         ];
     }
 }

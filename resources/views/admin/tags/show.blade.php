@@ -3,11 +3,11 @@
 @section('content')
 <div class="container">
   <div class="py-4">
-    <h1>{{$category->name}}</h1>
-    @if($category->posts->isNotEmpty())
+    <h1>{{$tag->name}}</h1>
+    @if($tag->posts->isNotEmpty())
         <h3>Post associati:</h3>
         <ul>
-            @foreach ($category->posts as $post)
+            @foreach ($tag->posts as $post)
                 <li><a href="{{route('admin.posts.show', $post)}}">{{$post->title}}</a></li>
             @endforeach
         </ul>

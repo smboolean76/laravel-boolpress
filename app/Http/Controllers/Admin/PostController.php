@@ -7,6 +7,7 @@ use App\Http\Requests\StorePostRequest;
 use App\Http\Requests\UpdatePostRequest;
 use App\Models\Category;
 use App\Models\Post;
+use App\Models\Tag;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Str;
 
@@ -32,8 +33,9 @@ class PostController extends Controller
     public function create()
     {
         $categories = Category::all();
+        $tags = Tag::all();
 
-        return view('admin.posts.create', compact('categories'));
+        return view('admin.posts.create', compact('categories', 'tags'));
     }
 
     /**
@@ -54,6 +56,10 @@ class PostController extends Controller
         $new_post->fill($data);
         $new_post->slug = Str::slug($new_post->title);
         $new_post->save();
+
+        if( isset($data['tags']) ) {
+            $new_post->tags()->sync($data['tags']);
+        }
 
         return redirect()->route('admin.posts.index')->with('message', "Il Post $new_post->title è stato creato con successo!");
     }
@@ -78,8 +84,9 @@ class PostController extends Controller
     public function edit(Post $post)
     {
         $categories = Category::all();
+        $tags = Tag::all();
 
-        return view('admin.posts.edit', compact('post', 'categories'));
+        return view('admin.posts.edit', compact('post', 'categories', 'tags'));
     }
 
     /**
@@ -110,6 +117,9 @@ class PostController extends Controller
         }
 
         $post->update($data);
+
+        $tags = isset($data['tags']) ? $data['tags'] : [];
+        $post->tags()->sync($tags);
 
         return redirect()->route('admin.posts.index')->with('message', "Il post $old_title è stato aggiornato!");
     }

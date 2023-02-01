@@ -3,6 +3,7 @@
 use App\Http\Controllers\Admin\CategoryController;
 use App\Http\Controllers\Admin\PostController;
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\Admin\TagController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -29,6 +30,7 @@ Route::middleware('auth')->prefix('admin')->name('admin.')->group(function () {
 
     Route::resource('posts', PostController::class)->parameters(['posts' => 'post:slug']);
     Route::resource('categories', CategoryController::class)->parameters(['categories' => 'category:slug']);
+    Route::resource('tags', TagController::class)->parameters(['tags' => 'tag:slug']);
 });
 
 // 🛡️ Tutte le rotte di autenticazione (registrazione, login ecc...)

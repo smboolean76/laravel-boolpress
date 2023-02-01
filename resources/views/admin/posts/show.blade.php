@@ -11,6 +11,14 @@
         Nessuna Categoria
       @endif
     </h3>
+    @if($post->tags->isNotEmpty())
+    <div class="mt-4">
+      <h3>Tags</h3>
+      @foreach ($post->tags as $tag)
+      <span class="badge bg-secondary">{{$tag->name}}</span>
+      @endforeach
+    </div>
+    @endif
     <div class="mt-4">
         <div class="text-center">
           @if ($post->cover_image)

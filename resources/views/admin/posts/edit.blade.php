@@ -62,6 +62,19 @@
                   @endforeach
               </select>
           </div>
+          <div class="mb-3">
+              <div class="mb-2">Tags</div>
+              @foreach ($tags as $tag)
+                  <div class="form-check form-check-inline">
+                      @if( $errors->any() )
+                        <input class="form-check-input" type="checkbox" id="{{$tag->slug}}" name="tags[]" value="{{$tag->id}}" {{ in_array( $tag->id, old('tags', []) ) ? 'checked' : '' }}>
+                      @else
+                        <input class="form-check-input" type="checkbox" id="{{$tag->slug}}" name="tags[]" value="{{$tag->id}}" {{ $post->tags->contains($tag->id) ? 'checked' : '' }}>
+                      @endif
+                        <label class="form-check-label" for="{{$tag->slug}}">{{$tag->name}}</label>
+                  </div>
+              @endforeach
+          </div>
             <button type="submit" class="btn btn-primary">Modifica</button>
         </form>
     </div>
