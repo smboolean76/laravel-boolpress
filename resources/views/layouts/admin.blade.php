@@ -60,12 +60,12 @@
                             </li>
                             <li class="nav-item">
                                 <a class="nav-link text-white {{ Route::currentRouteName() == 'admin.categories.index' ? 'bg-secondary' : '' }}" href="{{route('admin.categories.index')}}">
-                                    <i class="fa-solid fa-newspaper fa-lg fa-fw"></i> Categories
+                                    <i class="fa-solid fa-folder-open fa-lg fa-fw"></i> Categories
                                 </a>
                             </li>
                             <li class="nav-item">
                                 <a class="nav-link text-white {{ Route::currentRouteName() == 'admin.tags.index' ? 'bg-secondary' : '' }}" href="{{route('admin.tags.index')}}">
-                                    <i class="fa-solid fa-newspaper fa-lg fa-fw"></i> Tags
+                                    <i class="fa-solid fa-bookmark fa-lg fa-fw"></i> Tags
                                 </a>
                             </li>
                         </ul>
