@@ -20,7 +20,6 @@
     <!-- Usando Vite -->
     @vite(['resources/js/app.js'])
 </head>
-
 <body>
     <div id="app">
 
@@ -54,17 +53,17 @@
                                 </a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link text-white {{ Route::currentRouteName() == 'admin.posts.index' ? 'bg-secondary' : '' }}" href="{{route('admin.posts.index')}}">
+                                <a class="nav-link text-white {{str_contains(Route::currentRouteName(), 'admin.posts') ? 'bg-secondary' : '' }}" href="{{route('admin.posts.index')}}">
                                     <i class="fa-solid fa-newspaper fa-lg fa-fw"></i> Posts
                                 </a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link text-white {{ Route::currentRouteName() == 'admin.categories.index' ? 'bg-secondary' : '' }}" href="{{route('admin.categories.index')}}">
+                                <a class="nav-link text-white {{ str_contains(Route::currentRouteName(),'admin.categories') ? 'bg-secondary' : '' }}" href="{{route('admin.categories.index')}}">
                                     <i class="fa-solid fa-folder-open fa-lg fa-fw"></i> Categories
                                 </a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link text-white {{ Route::currentRouteName() == 'admin.tags.index' ? 'bg-secondary' : '' }}" href="{{route('admin.tags.index')}}">
+                                <a class="nav-link text-white {{ str_contains(Route::currentRouteName(), 'admin.tags') ? 'bg-secondary' : '' }}" href="{{route('admin.tags.index')}}">
                                     <i class="fa-solid fa-bookmark fa-lg fa-fw"></i> Tags
                                 </a>
                             </li>
