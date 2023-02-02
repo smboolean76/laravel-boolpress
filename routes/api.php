@@ -24,3 +24,5 @@ use Illuminate\Support\Facades\Route;
 
 // /api/posts
 Route::get('posts', [PostController::class, 'index']);
+// /api/posts/sit-ut-facilis-atque-earum
+Route::get('posts/{slug}', [PostController::class, 'show']);
