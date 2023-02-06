@@ -57,6 +57,7 @@ class PostController extends Controller
         $new_post->slug = Str::slug($new_post->title);
         $new_post->save();
 
+        // scrivo nella pivot post_tag
         if( isset($data['tags']) ) {
             $new_post->tags()->sync($data['tags']);
         }

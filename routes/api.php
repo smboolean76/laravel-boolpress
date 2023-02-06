@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Api\CommentController;
 use App\Http\Controllers\Api\PostController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
@@ -26,3 +27,5 @@ use Illuminate\Support\Facades\Route;
 Route::get('posts', [PostController::class, 'index']);
 // /api/posts/sit-ut-facilis-atque-earum
 Route::get('posts/{slug}', [PostController::class, 'show']);
+// /api/comments/{post_id}
+Route::post('comments/{post}', [CommentController::class, 'store']);
